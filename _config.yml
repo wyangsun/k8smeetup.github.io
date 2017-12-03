@@ -65,6 +65,8 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-include-cache
+  - glossary_tags
+  - liquify_filter
 # disabled gems
 #  - jekyll-redirect-from
 
