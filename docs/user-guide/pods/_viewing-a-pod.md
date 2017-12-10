@@ -1,4 +1,5 @@
 使用 `kubectl get` 命令去查看特定的 pod:
+
 ```shell
 $ kubectl get pod NAME
 NAME                       READY   STATUS    RESTARTS   AGE

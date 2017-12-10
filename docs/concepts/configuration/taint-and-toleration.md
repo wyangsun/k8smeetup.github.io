@@ -130,11 +130,11 @@ tolerations:
 通过 taint 和 toleration ，可以灵活地让 pod *避开*某些节点或者将 pod 从某些节点驱逐。下面是几个使用例子：
 
 
-* **专用节点**: 如果您想将某些节点专门分配给特定的一组用户使用，您可以给这些节点添加一个 taint（即，
+* **专用节点**：如果您想将某些节点专门分配给特定的一组用户使用，您可以给这些节点添加一个 taint（即，
 `kubectl taint nodes nodename dedicated=groupName:NoSchedule`），然后给这组用户的 pod 添加一个相对应的 toleration（通过编写一个自定义的[admission controller](/docs/admin/admission-controllers/)，很容易就能做到）。拥有上述 toleration 的 pod 就能够被分配到上述专用节点，同时也能够被分配到集群中的其它节点。如果您希望这些 pod 只能被分配到上述专用节点，那么您还需要给这些专用节点另外添加一个和上述 taint 类似的 label （例如：`dedicated=groupName`），同时 还要在上述 admission controller 中给 pod 增加节点亲和性要求上述 pod 只能被分配到添加了 `dedicated=groupName` 标签的节点上。
 
 
-* **配备了特殊硬件的节点**: 在部分节点配备了特殊硬件（比如 GPU）的集群中，我们希望不使用这类硬件的 pod 不要被分配到这些特殊节点，以便为后继需要这类硬件的 pod 保留资源。要达到这个目的，可以先给配备了特殊硬件的节点添加 taint（例如 `kubectl taint nodes nodename special=true:NoSchedule` or `kubectl taint nodes nodename special=true:PreferNoSchedule`)，然后给使用了这类特殊硬件的 pod 添加一个相匹配的 toleration。和专用节点的例子类似，添加这个 toleration 的最简单的方法是使用自定义 [admission controller](/docs/admin/admission-controllers/)。比如，admission controller 可以从 pod 的一些特点判断出该 pod 应该被允许分配到一些特殊节点，然后 admission controller 就给 pod 添加对应的 toleration。为了保证使用了特殊硬件的 pod *只*被分配到配备了特殊硬件的节点，您还需要做一些额外的工作，比如，您可以使用[opaque integer resources](/docs/concepts/configuration/manage-compute-resources-container/#opaque-integer-resources-alpha-feature)表示这类特殊资源，然后在 PodSpec 中申请使用它；或者您也可以给配备了特殊硬件的节点添加 label，然后给需要特殊硬件的 pod 配置节点亲和性。
+* **配备了特殊硬件的节点**：在部分节点配备了特殊硬件（比如 GPU）的集群中，我们希望不使用这类硬件的 pod 不要被分配到这些特殊节点，以便为后继需要这类硬件的 pod 保留资源。要达到这个目的，可以先给配备了特殊硬件的节点添加 taint（例如 `kubectl taint nodes nodename special=true:NoSchedule` or `kubectl taint nodes nodename special=true:PreferNoSchedule`)，然后给使用了这类特殊硬件的 pod 添加一个相匹配的 toleration。和专用节点的例子类似，添加这个 toleration 的最简单的方法是使用自定义 [admission controller](/docs/admin/admission-controllers/)。比如，admission controller 可以从 pod 的一些特点判断出该 pod 应该被允许分配到一些特殊节点，然后 admission controller 就给 pod 添加对应的 toleration。为了保证使用了特殊硬件的 pod *只*被分配到配备了特殊硬件的节点，您还需要做一些额外的工作，比如，您可以使用[opaque integer resources](/docs/concepts/configuration/manage-compute-resources-container/#opaque-integer-resources-alpha-feature)表示这类特殊资源，然后在 PodSpec 中申请使用它；或者您也可以给配备了特殊硬件的节点添加 label，然后给需要特殊硬件的 pod 配置节点亲和性。
 
 
 * **基于 taint 的驱逐 （alpha 特性）**: 这是在每个 pod 中配置的在节点出现问题时的驱逐行为，接下来的章节会描述这个特性
@@ -143,7 +143,7 @@ tolerations:
 ## 基于 taint 的驱逐
 
 
-前文我们提到过 taint 的 effect 值 `NoExecute`  , 它会影响已经在节点上运行的 pod
+前文我们提到过 taint 的 effect 值 `NoExecute`  ，它会影响已经在节点上运行的 pod
 
  * 如果 pod 不能忍受effect 值为 `NoExecute` 的 taint，那么 pod 将马上被驱逐
  * 如果 pod 能够忍受effect 值为 `NoExecute` 的 taint，但是在 toleration 定义中没有指定 `tolerationSeconds`，则 pod 还会一直在这个节点上运行。

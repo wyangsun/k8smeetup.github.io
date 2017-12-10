@@ -1,4 +1,5 @@
-## SynopsisStatic compilation of html from markdown including processing for grouping code snippets into arbitrary tabs.
+## Synopsis
+Static compilation of html from markdown including processing for grouping code snippets into arbitrary tabs.
 
 ## Code Example
 
