@@ -22,7 +22,7 @@ cn-approvers:
 * 服务目录要求 Kubernetes 集群为 1.7 或更高版本。
 
 * 您必须在集群中启用集群 DNS。
-    * 如果您使用的是基于云服务的 Kubernetes 集群或 {% glossary_tooltip text="Minikube" term_id="minikube" %}，您可能已经启用了群集 DNS。
+    * 如果您使用的是基于云服务的 Kubernetes 集群或 Minikube，您可能已经启用了群集 DNS。
     * 如果您使用 `hack/local-up-cluster.sh`，请确保先设置 `KUBE_ENABLE_CLUSTER_DNS` 环境变量，
     然后再运行安装脚本。
 
