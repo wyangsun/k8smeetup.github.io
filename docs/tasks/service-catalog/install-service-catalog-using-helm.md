@@ -67,7 +67,7 @@ svc-cat/catalog 0.0.1   service-catalog API server and controller-manag...
 您的 Kubernetes 集群须启用 RBAC， 这要求您的 Tiller Pod(s) 拥有 `cluster-admin` 访问权限。
 
 
-如果您正使用 {% glossary_tooltip text="Minikube" term_id="minikube" %}，运行 `minikube start` 命令时加入以下参数：
+如果您正使用 Minikube，运行 `minikube start` 命令时加入以下参数：
 
 ```shell
 minikube start --extra-config=apiserver.Authorization.Mode=RBAC
